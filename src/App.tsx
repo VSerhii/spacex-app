@@ -1,10 +1,9 @@
 import React from 'react';
+import { Launches } from './Todos'
 
-interface AppProps { }
-
-function App({ }: AppProps) {
+function App() {
 	return (
-		<div>Hello</div>
+		<Launches />
 	);
 }
 
