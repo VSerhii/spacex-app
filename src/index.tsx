@@ -1,15 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import './i18n';
 import { Provider } from 'urql';
 import { client } from './urqlClient'
 
 ReactDOM.render(
-	<React.StrictMode>
-		<Provider value={client}>
-			<App />
-		</Provider>,
-	</React.StrictMode>,
+	<Provider value={client}>
+		<App />
+	</Provider>,
 	document.getElementById('root'),
 );
 

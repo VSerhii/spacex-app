@@ -2,7 +2,7 @@
 export default {
 	mount: {
 		public: { url: '/', static: true },
-		src: { url: '/dist' },
+		src: { url: '/' },
 	},
 	plugins: [
 		'@snowpack/plugin-react-refresh',
@@ -23,7 +23,8 @@ export default {
 		bundle: true,
 		minify: true,
 		target: 'es2020',
-		treeshake: true
+		treeshake: true,
+		sourcemap: false
 	},
 	packageOptions: {
 		/* ... */
