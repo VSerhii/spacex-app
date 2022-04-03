@@ -26,8 +26,9 @@ const LoadingSpinner = () => {
 
 const DivSpinner = styled.div`
   position: fixed;
-  top: 41%;
-  left: 50%;
+	top: 41%;
+  left: 45%;
+	z-index: 2000;
 `;
 
 const rotator = keyframes`

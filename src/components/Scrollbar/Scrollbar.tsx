@@ -1,17 +1,16 @@
-import React, { ReactElement, ReactNode, useRef, useState } from 'react';
+import React, { useEffect, ReactElement, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { Scrollbars } from 'react-custom-scrollbars';
 import ReactResizeDetector from 'react-resize-detector';
 
-const Scrollbar = ({ children }: { children: ReactNode }): ReactElement => {
+const Scrollbar = ({ children, onScrollBottom }: any): ReactElement => {
 	const scrollbarRef = useRef(null);
 	const [isScrolledToBottom, setIsScrolledToBottom] = useState(false);
 
-	const onScrollStop = () => {
+	const onScroll = () => {
 		const scrollValues = scrollbarRef?.current.getValues();
 		setIsScrolledToBottom(
-			(scrollValues.scrollHeight <= scrollValues.clientHeight)
-			|| scrollValues.top === 1
+			scrollValues.top === 1
 		)
 		console.log('isScrolledToBottom', isScrolledToBottom)
 	}
@@ -20,14 +19,16 @@ const Scrollbar = ({ children }: { children: ReactNode }): ReactElement => {
 		scrollbarRef?.current.update();
 	}
 
+	useEffect(() => {
+		if (isScrolledToBottom) onScrollBottom()
+	}, [isScrolledToBottom])
+
 	return (
 		<Scrollbars
 			ref={scrollbarRef}
 			renderThumbVertical={() => <DivScrollbarThumb />}
-			renderView={(props) => (
-				<DivView className="view" {...props} />
-			)}
-			onScrollStop={onScrollStop}
+			renderView={(props) => <DivView className="view" {...props} />}
+			onScroll={onScroll}
 		>
 			<div>
 				<ReactResizeDetector

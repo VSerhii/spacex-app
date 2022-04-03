@@ -8,7 +8,11 @@ const resources = {
 			"Rocket name": "Rocket name",
 			"Date": "Date",
 			"Status": "Status",
-			"Video": "Video"
+			"Video": "Video",
+			"Watch": "Watch",
+			"no info": "no info",
+			"Successful": "Successful",
+			"Unsuccessful": "Unsuccessful"
 		}
 	},
 	sk: {
@@ -17,7 +21,11 @@ const resources = {
 			"Rocket name": "Nazov rakety",
 			"Date": "Datum",
 			"Status": "Status",
-			"Video": "Video"
+			"Video": "Video",
+			"Watch": "Prehrat",
+			"no info": "bez informacie",
+			"Successful": "Uspesny",
+			"Unsuccessful": "Neuspesny"
 		}
 	}
 };

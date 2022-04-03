@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import styled from 'styled-components';
 import { useQuery } from 'urql';
 import { launchesPastQuery } from '../../queries/launchesPast'
@@ -7,17 +7,11 @@ import LoadingSpinner from '../LoadingSpinner'
 import { useTranslation } from 'react-i18next';
 
 const Launches = () => {
+	const [queryVariables, setQueryVariables] = useState({ offset: 0, limit: 30 })
 	const { t } = useTranslation();
-	const [result] = useQuery({ query: launchesPastQuery, variables: { offset: 0, limit: 30 } });
+	const [result] = useQuery({ query: launchesPastQuery, variables: queryVariables });
 	const { data, fetching, error } = result;
-
-	if (error) return <p>Oh no... {error.message}</p>;
-
-	if (fetching) {
-		return (
-			<LoadingSpinner />
-		)
-	}
+	const [localData, setLocalData] = useState()
 
 	const columns = [
 		{
@@ -43,9 +37,15 @@ const Launches = () => {
 		},
 	];
 
+	const onScrollBottom = () => {
+		setQueryVariables({ offset: queryVariables.offset, limit: queryVariables.limit + 10 })
+	}
+
 	return (
 		<DivContent>
-			<Table tableColumns={columns} tableData={data.launchesPast} />
+			{error && <p>Oh no... {error.message}</p>}
+			{fetching && <LoadingSpinner />}
+			<Table tableColumns={columns} tableData={data?.launchesPast || []} onScrollBottom={onScrollBottom} />
 		</DivContent>
 	);
 };

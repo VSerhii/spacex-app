@@ -13,18 +13,18 @@ const youtube_parser = (url: string): string | null => {
 	return (match && match[7].length == 11) ? match[7] : null;
 }
 
-const getLaunchStatus = (value: boolean | null) => {
-	if (value === null) return "no info";
-	return value ? "successful" : "unsuccessful"
+const getLaunchStatus = (value: boolean | null, t: (param: string) => string) => {
+	if (value === null) return t("no info");
+	return value ? t("Successful") : t("Unsuccessful")
 }
 
-const Table = ({ tableColumns, tableData }: any) => {
+const Table = ({ tableColumns, tableData, onScrollBottom }: any) => {
 	const { t, i18n } = useTranslation()
 
 	const [isModalOpen, setIsModalOpen] = useState(false)
 	const [_videoId, setVideoId] = useState<string | null>(null);
 	const columns = useMemo(() => tableColumns, [i18n.language])
-	const data = useMemo(() => tableData, [])
+	const data = useMemo(() => tableData, [tableData.length])
 
 	const {
 		getTableProps,
@@ -37,12 +37,12 @@ const Table = ({ tableColumns, tableData }: any) => {
 		columns,
 		data,
 	},
-		useSortBy
+		useSortBy,
 	)
 
 	return (
 		<DivWrapper>
-			<Scrollbar>
+			<Scrollbar onScrollBottom={onScrollBottom}>
 				<DivSection>
 					<DivLable>SpaceX App</DivLable>
 					<DivColumnsControl>{allColumns.map(column => (
@@ -73,7 +73,7 @@ const Table = ({ tableColumns, tableData }: any) => {
 											renderCell = timestampToYyyyMmDdHhNnSs(cell.value)
 										}
 										if (cell.column.id === "launch_success") {
-											renderCell = getLaunchStatus(cell.value)
+											renderCell = getLaunchStatus(cell.value, t)
 										}
 										if (cell.column.id === 'links.video_link') {
 											renderCell = (
@@ -81,7 +81,7 @@ const Table = ({ tableColumns, tableData }: any) => {
 													setVideoId(youtube_parser(cell.value))
 													setIsModalOpen(true)
 												}} >
-													Watch
+													{t('Watch')}
 												</button>
 											)
 										}

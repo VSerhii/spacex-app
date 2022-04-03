@@ -7,19 +7,10 @@ export const launchesPastQuery = `
 				site_name_long
 			}
 			links {
-				article_link
 				video_link
 			}
 			rocket {
 				rocket_name
-				first_stage {
-					cores {
-						flight
-						core {
-							status
-						}
-					}
-				}
 			}
 			launch_success
 		}
