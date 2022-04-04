@@ -2,17 +2,23 @@ import React from 'react'
 import styled from 'styled-components'
 import { useTranslation } from 'react-i18next'
 
+interface SpanSwitchProps {
+	readonly isActive: boolean;
+};
+
 const LanguageSwitcher = () => {
 	const { i18n } = useTranslation()
 	const changeLanguage = (lng) => {
 		i18n.changeLanguage(lng);
 	}
+	console.log('lolka', i18n.language)
 	return (
 		<DivWrapper>
-			<DivButtons>
-				<button onClick={() => changeLanguage('sk')}>SK</button>
-				<button onClick={() => changeLanguage('en')}>en</button>
-			</DivButtons>
+			<DivSwitches>
+				<SpanSwitch isActive={i18n.language === 'en'} onClick={() => changeLanguage('en')}>EN</SpanSwitch>
+				/
+				<SpanSwitch isActive={i18n.language === 'sk'} onClick={() => changeLanguage('sk')}>SK</SpanSwitch>
+			</DivSwitches>
 		</DivWrapper>
 	)
 }
@@ -29,8 +35,15 @@ const DivWrapper = styled.div`
 	text-align: center;
 `
 
-const DivButtons = styled.div`
+const DivSwitches = styled.div`
 	margin: 0 20px;
+`;
+
+const SpanSwitch = styled.span<SpanSwitchProps>`
+	color: ${({ isActive, theme }) => isActive ? theme.text.primary : theme.text.secondary};
+	font-size: 14px;
+	padding 0 5px;
+	cursor: pointer;
 `;
 
 export default LanguageSwitcher

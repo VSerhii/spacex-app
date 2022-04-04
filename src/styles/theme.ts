@@ -18,11 +18,6 @@ export default {
 			primary: color.white,
 			secondary: color.dustyGray,
 		},
-		checkbox: {
-			checked: color.azure,
-			default: color.dolphin,
-			check: color.balticSea,
-		},
 		hover: color.whiteTen,
 		success: color.brightTurquoiseGreen,
 	},
