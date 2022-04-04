@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { KeyboardEvent, useEffect } from 'react'
 import YouTube from 'react-youtube';
 import styled from 'styled-components';
 
@@ -8,7 +8,8 @@ type ModalYoutubeProps = {
 }
 
 const ModalYoutube = ({ videoId, onClose }: ModalYoutubeProps) => {
-	const onKeyDown = (event) => {
+
+	const onKeyDown = (event: any) => {
 		if (event.keyCode === 27) {
 			onClose();
 		};

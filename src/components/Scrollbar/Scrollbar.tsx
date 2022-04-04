@@ -4,7 +4,7 @@ import { Scrollbars } from 'react-custom-scrollbars';
 import ReactResizeDetector from 'react-resize-detector';
 
 const Scrollbar = ({ children, onScrollBottom }: any): ReactElement => {
-	const scrollbarRef = useRef(null);
+	const scrollbarRef = useRef(null)
 	const [isScrolledToBottom, setIsScrolledToBottom] = useState(false);
 
 	const onScroll = () => {

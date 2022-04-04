@@ -7,10 +7,10 @@ import ModalYoutube from '../ModalYotubeVideo';
 import { useTranslation } from 'react-i18next';
 
 // get youtube video id
-const youtube_parser = (url: string): string | null => {
+const youtube_parser = (url: string): string => {
 	const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
 	const match = url.match(regExp);
-	return (match && match[7].length == 11) ? match[7] : null;
+	return (match && match[7].length == 11) ? match[7] : "";
 }
 
 const getLaunchStatus = (value: boolean | null, t: (param: string) => string) => {
@@ -20,9 +20,9 @@ const getLaunchStatus = (value: boolean | null, t: (param: string) => string) =>
 
 const Table = ({ tableColumns, tableData, onScrollBottom }: any) => {
 	const { t, i18n } = useTranslation()
-
 	const [isModalOpen, setIsModalOpen] = useState(false)
-	const [_videoId, setVideoId] = useState<string | null>(null);
+	const [_videoId, setVideoId] = useState<string>('');
+
 	const columns = useMemo(() => tableColumns, [i18n.language])
 	const data = useMemo(() => tableData, [tableData.length])
 

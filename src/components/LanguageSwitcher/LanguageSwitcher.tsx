@@ -8,7 +8,7 @@ interface SpanSwitchProps {
 
 const LanguageSwitcher = () => {
 	const { i18n } = useTranslation()
-	const changeLanguage = (lng) => {
+	const changeLanguage = (lng: string) => {
 		i18n.changeLanguage(lng);
 	}
 	console.log('lolka', i18n.language)
