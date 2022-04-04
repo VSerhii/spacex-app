@@ -11,7 +11,7 @@ const LanguageSwitcher = () => {
 	const changeLanguage = (lng: string) => {
 		i18n.changeLanguage(lng);
 	}
-	console.log('lolka', i18n.language)
+
 	return (
 		<DivWrapper>
 			<DivSwitches>
