@@ -36,6 +36,7 @@ const Table = ({ tableColumns, tableData, onScrollBottom }: any) => {
 	} = useTable({
 		columns,
 		data,
+		disableSortBy: data.length === 0
 	},
 		useSortBy,
 	)
@@ -57,7 +58,20 @@ const Table = ({ tableColumns, tableData, onScrollBottom }: any) => {
 						{headerGroups.map(headerGroup => (
 							<TrStyled {...headerGroup.getHeaderGroupProps()}>
 								{headerGroup.headers.map(column => (
-									<ThHead {...column.getHeaderProps(column.getSortByToggleProps())}>{column.render(t('Header'))}</ThHead>
+									<ThHead
+										{...column.getHeaderProps(column.getSortByToggleProps())}
+									>
+										{column.render(t('Header'))}
+										<span>
+											{
+												column.isSorted && column.canSort
+													? column.isSortedDesc
+														? ' 🔽'
+														: ' 🔼'
+													: ''
+											}
+										</span>
+									</ThHead>
 								))}
 							</TrStyled>
 						))}
