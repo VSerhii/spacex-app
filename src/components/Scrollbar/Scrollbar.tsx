@@ -12,7 +12,6 @@ const Scrollbar = ({ children, onScrollBottom }: any): ReactElement => {
 		setIsScrolledToBottom(
 			scrollValues.top === 1
 		)
-		console.log('isScrolledToBottom', isScrolledToBottom)
 	}
 
 	const handleResize = () => {
