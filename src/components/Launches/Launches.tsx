@@ -11,7 +11,6 @@ const Launches = () => {
 	const { t } = useTranslation();
 	const [result] = useQuery({ query: launchesPastQuery, variables: queryVariables });
 	const { data, fetching, error } = result;
-	const [localData, setLocalData] = useState()
 
 	const columns = [
 		{
